@@ -1,0 +1,90 @@
+html,body {
+    height: 100%;
+}
+
+.rc-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.rc-header {
+    text-align: center;
+    font-size: 40px;
+    font-weight: normal;
+    padding: 5px 0 35px 0;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 3px;
+    font-family: 'Open Sans', sans-serif;   
+}
+
+.content-top {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.rc-social-icons {
+    position: fixed;
+    bottom: 0;
+    margin: 0 auto;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
+
+/*social icons*/
+ 
+  .social .link {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-clip: content-box;
+    padding: 10px;
+    transition: .5s;
+    color: #D7D0BE;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 24px;
+  }
+  
+  .social .link span {
+    display: block;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    transform: translate(-50%, -50%);
+  }
+  
+  .social .link:hover {
+    /* padding: 2px; */
+    color: white;
+    /* margin-left: -5px; */
+    transform: translateX(0) rotate(360deg);
+  }
+  
+  .social .link.google-plus {
+    background-color: tomato;
+    color: white;
+  }
+  
+  .social .link.twitter {
+    background-color: #00ACEE;
+    color: white;
+  }
+  
+  .social .link.facebook {
+    background-color: #3B5998;
+    color: white;
+  }
+
+@media (max-width: 1366px) {
+    .content-top {
+        width: 65%;
+    }
+}

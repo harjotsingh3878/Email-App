@@ -3,41 +3,47 @@ import './index.css';
 class CommentForm extends Component {
  constructor(props) {
  super(props);
- this.state = { author: '', text: '' };
- this.handleAuthorChange = this.handleAuthorChange.bind(this);
- this.handleTextChange = this.handleTextChange.bind(this);
+ this.state = { uname: '', email: '' };
+ this.handleUserNameChange = this.handleUserNameChange.bind(this);
+ this.handleEmailChange = this.handleEmailChange.bind(this);
  this.handleSubmit = this.handleSubmit.bind(this);
  }
- handleAuthorChange(e) {
- this.setState({ author: e.target.value });
+ handleUserNameChange(e) {
+ this.setState({ uname: e.target.value });
  }
- handleTextChange(e) {
- this.setState({ text: e.target.value });
+ handleEmailChange(e) {
+ this.setState({ email: e.target.value });
  }
  handleSubmit(e) {
- e.preventDefault();
- console.log(`${this.state.author} said "${this.state.text}"`)
- //we will be tying this into the POST method in a bit
- }
+    e.preventDefault();
+    let uname = this.state.uname.trim();
+    let email = this.state.email.trim();
+    if (!email || !uname) {
+        return;
+    }
+    this.props.onCommentSubmit({ uname: uname, email: email });
+    this.setState({ uname: '', email: '' });
+     //console.log(`${this.state.uname} said "${this.state.email}"`)
+}
  render() {
  return (
  <form className='commentForm' onSubmit={ this.handleSubmit }>
- <input
- type='text'
- placeholder='Your name…'
- className='commentFormAuthor'
- value={ this.state.author }
- onChange={ this.handleAuthorChange } />
- <input
- type='text'
- placeholder='Say something…'
- className='commentFormText'
- value={ this.state.text }
- onChange={ this.handleTextChange } />
- <input
- type='submit'
- className='commentFormPost'
- value='Post' />
+    <input
+    type='text'
+    placeholder='Your name…'
+    className='commentFormAuthor rc-input'
+    value={ this.state.uname }
+    onChange={ this.handleUserNameChange } />
+    <input
+    type='text'
+    placeholder='Your email…'
+    className='commentFormText rc-input'
+    value={ this.state.email }
+    onChange={ this.handleEmailChange } />
+    <input
+    type='submit'
+    className='commentFormPost rc-submit'
+    value='Submit' />
  </form>
  )
  }
