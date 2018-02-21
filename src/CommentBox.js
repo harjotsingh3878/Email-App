@@ -24,17 +24,44 @@ class CommentBox extends Component {
     handleCommentSubmit(comment) {
         //add POST request
         let comments = this.state.data;
-        comment.id = Date.now();
-        let newComments = comments.concat([comment]);
-        this.setState({ data: newComments });
-        axios.post(this.props.url, comment)
-        .then(res => {
-            this.setState({ data: res });
-        })
-        .catch(err => {
-            console.error(err);
-            this.setState({ data: comments });
-        });
+        //comment.id = Date.now();
+        //let newComments = comments.concat([comment]);
+        //this.setState({ data: newComments });
+        var re = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+        console.log(`${comment.email}`);
+        if(re.test(String(comment.email).toLowerCase())){
+            axios.post(this.props.url, comment)
+            .then(res => {
+                this.setState({ data: res });
+            })
+            .catch(err => {
+                console.error(err);
+                this.setState({ data: comments });
+                Alert.warning('<h1>Test message 1</h1>', {
+                    position: 'top-right',
+                    effect: 'stackslide',
+                    onShow: function () {
+                        console.log('Submitted successfully!')
+                    },
+                    beep: false,
+                    timeout: 'none',
+                    offset: 100
+                });
+            });
+        } else {
+            Alert.warning('Invalid Email', {
+                position: 'top-right',
+                effect: 'stackslide',
+                onShow: function () {
+                    console.log('Invalid Email!')
+                },
+                beep: false,
+                timeout: 'none',
+                offset: 100
+            });
+        }
+
+        
     }
     componentDidMount() {
         this.loadCommentsFromServer();

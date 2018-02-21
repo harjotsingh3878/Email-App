@@ -14,6 +14,16 @@
     <link rel="stylesheet" href="css/custom.css">
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.vide.min.js"></script>
+    <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -29,11 +39,14 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+
     <div class="rc-social-icons social">
-        <a href="https://facebook.com/ondrej.p.barta" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-        <a href="https://twitter.com/PageOnlineXS" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-        <a href="https://plus.google.com/+OndřejBárta-Otaku" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
-      </div>
+        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+        <a class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world" class="link twitter" target="_target"><span class="fa fa-twitter"></span></a>
+        <a data-action="share" data-annotation="none" data-height="15" data-href="http://zaimbr.com/" class="link google-plus g-plus"><span class="fa fa-google-plus-square"></span></a>
+        <div class="g-plus" data-action="share" data-annotation="none" data-height="15" data-href="http://zaimbr.com/"></div>
+    </div>
     <div data-vide-bg="video/background" class="rc-container">
       <div class="content-top">
         <div class="rc-header">Here goes description...</div>
