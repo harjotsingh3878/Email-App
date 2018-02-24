@@ -61,11 +61,11 @@ router.route('/comments')
         //     //responds with a json object of our database comments.
         //     res.json(comments)
         // });
-        var name =  'a@a.com';
+        var name =  'email';
         const taskKey = storage.key(['UserInfo', name]);
 
         storage.get(taskKey).then(comments => {
-            console.log(comments);
+            //console.log(comments);
             res.json(comments);
           });
     })
