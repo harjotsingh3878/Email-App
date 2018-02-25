@@ -27,7 +27,8 @@ var app = express();
 var router = express.Router();
 //set our port to either a predetermined port number if you have set 
 //it up, or 3001
-var port = process.env.API_PORT || 3001;
+//var port = 5100; //local
+var port = process.env.API_PORT || 8080; //prod
 
 //now we should configure the API to use bodyParser and look for 
 //JSON data in the request body

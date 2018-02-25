@@ -5,7 +5,8 @@ import './index.css';
 
 ReactDOM.render(
     <CommentBox
-    url='http://localhost:3001/api/comments'
+    url='http://localhost:8080/api/comments'
     pollInterval={2000} />,
     document.getElementById('root')
+    
 );

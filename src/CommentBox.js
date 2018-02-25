@@ -24,9 +24,11 @@ class CommentBox extends Component {
             data: [],
             time: {}, seconds: 518400,
             modalIsOpen: false,
-            errorModalIsOpen: false };
+            errorModalIsOpen: false,
+            IsEmailInvalid: false };
         this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
         this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+        this.handleInvalidEmail = this.handleInvalidEmail.bind(this);
 
         /*timer*/
         // this.state = { time: {}, seconds: 518400 };
@@ -70,15 +72,17 @@ class CommentBox extends Component {
                 this.setState({ data: comments });
             });
         } else {
-            this.openErrorModal();
+            this.handleInvalidEmail(true);
+            //this.openErrorModal();
             //this.openModal();
-        }
-
-        
+        }  
+    }
+    handleInvalidEmail(invalidEmail) {
+        this.setState({IsEmailInvalid: invalidEmail});
     }
     componentDidMount() {
-        this.loadCommentsFromServer();
-        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+       // this.loadCommentsFromServer();
+       // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
 
         let timeLeftVar = this.secondsToTime(this.state.seconds);
         this.setState({ time: timeLeftVar });
@@ -167,7 +171,10 @@ class CommentBox extends Component {
                 </div>
                 <div className="rc-header">Stay tuned for something amazing!. Subscribe to be notified.</div>
                 <div className='commentBox'>
-                <CommentForm onCommentSubmit={ this.handleCommentSubmit }/>
+                <CommentForm 
+                    onCommentSubmit={ this.handleCommentSubmit } 
+                    onInvalidEmailChange={this.handleInvalidEmail}
+                    InvalidEmail={this.state.IsEmailInvalid}/>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}

@@ -12,8 +12,6 @@ span {
 
 .rc-container {
   background-size: cover;
-  height: 100%;
-  display: flex;
   align-items: center;
 }
 
@@ -30,8 +28,13 @@ span {
 }
 
 .content-top {
+  width: 100%;
+}
+
+.content-top #root {
   width: 500px;
-  margin: 0 auto;
+  margin: 0 auto 0 auto;
+  padding: 50px 0 100px 0;
 }
 
 .styled {
@@ -56,9 +59,9 @@ span {
 }
 #overlay {
 	background: rgba(0, 0, 0, 0.56) url(../images/overlays/01.png) top left repeat;
-	position: fixed;
 	top: 0px;
-	width: 100%;
+  width: 100%;
+  height: 100%;
 	bottom: 0px;
 	opacity: 0.8;
 }
@@ -79,7 +82,6 @@ span {
 }
 
 .rc-social-icons {
-  position: fixed;
   bottom: 0;
   margin: 0 auto;
   z-index: 10;
@@ -99,7 +101,42 @@ input.rc-input {
   height: 25px;
   outline: 0;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 1; /* Firefox */
+}
 
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #fff;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #fff;
+}
+
+input.rc-input.error {
+  color: red;
+  border: 2px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin: 0 0 10px 10px;
+}
+
+input.rc-input.error::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: red;
+  opacity: 1; /* Firefox */
+}
+
+input.rc-input.error:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: red;
+}
+
+input.rc-input.error::-ms-input-placeholder { /* Microsoft Edge */
+  color: red;
+}
 .rc-submit {
   background-color: #ff4638;
   border-radius: 8px;
@@ -117,18 +154,7 @@ input.rc-input {
   background-color: #ff4638;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #fff;
-  opacity: 1; /* Firefox */
-}
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #fff;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-  color: #fff;
-}
 
 .commentForm {
   display: flex;
@@ -283,6 +309,35 @@ input.rc-input {
   position: absolute;
   top: -50px;
   right: 39%;
+}
+
+@media (max-width: 768px) {
+  .content-top #root {
+      width: 100%;
+  }
+  #overlay {
+    height: auto;
+  }
+} 
+
+@media (max-width: 500px) {
+  .countdown.styled {
+    width: 300px;
+    margin: 0 auto 50px auto;
+  }
+  .styled div {
+    min-width: 70px;
+    margin: 25px 25px 0 25px;  
+  }
+  .styled div:first-child {
+    margin: 25px 25px 0 25px;    
+  }
+} 
+
+@media (max-width: 320px) {
+  .countdown.styled {
+    width: 100%;
+  }
 }
 
 /* html,body {
