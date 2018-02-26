@@ -10,24 +10,11 @@
     "foreman": "^2.0.0",
     "marked": "^0.3.12",
     "mongoose": "^5.0.4",
-    "nodemon": "^1.14.12",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-modal": "^3.3.1",
-    "react-scripts": "1.1.1"
+    "nodemon": "^1.14.12"
   },
-  "proxy": {
-    "/api/comments": {
-      "target": "http://localhost:3000/",
-      "ws": true
-    }
-  },
+  "proxy": "http://localhost:3000/",
   "scripts": {
     "deploy": "gcloud app deploy",
-    "start": "nf start",
-    "start-dev": "nf start -p 3000",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node server.js"
   }
 }
