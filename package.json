@@ -18,11 +18,9 @@
   },
   "proxy": {
     "/api/comments": {
-      "target": "http://localhost:3000/"
+      "target": "http://localhost:3000/",
+      "ws": true
     }
-  },
-  "devServer": {
-    "disableHostCheck": true
   },
   "scripts": {
     "deploy": "gcloud app deploy",
