@@ -15,6 +15,7 @@
   "proxy": "http://localhost:3000/",
   "scripts": {
     "deploy": "gcloud app deploy",
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm run build"
   }
 }
