@@ -338,6 +338,9 @@ input.rc-input.error::-ms-input-placeholder { /* Microsoft Edge */
   .countdown.styled {
     width: 100%;
   }
+  .ReactModalPortal .ReactModal__Content.ReactModal__Content--after-open {
+    width: 100%;
+  }
 }
 
 /* html,body {
