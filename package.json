@@ -21,6 +21,9 @@
       "target": "http://localhost:3000/"
     }
   },
+  "devServer": {
+    "disableHostCheck": true
+  },
   "scripts": {
     "deploy": "gcloud app deploy",
     "start": "nf start",
