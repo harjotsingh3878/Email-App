@@ -12,7 +12,6 @@
     "mongoose": "^5.0.4",
     "nodemon": "^1.14.12"
   },
-  "proxy": "http://localhost:3000/",
   "scripts": {
     "deploy": "gcloud app deploy",
     "start": "node server.js",
