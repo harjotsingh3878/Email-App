@@ -18,6 +18,6 @@
   "scripts": {
     "deploy": "gcloud app deploy",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install && react-scripts start"
+    "heroku-postbuild": "cd client && npm install && react-scripts start"
   }
 }
