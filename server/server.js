@@ -1,8 +1,11 @@
 'use strict'
 //first we import our dependencies…
 var express = require('express');
+var cors = require('cors');
 //var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var swaggerUi = require('swagger-ui-express');
+var swaggerDocument = require('./swagger.json');
 //var Comment = require('../model/comments');
 
 //dbconfg cloud datastore
@@ -28,7 +31,7 @@ var router = express.Router();
 //set our port to either a predetermined port number if you have set 
 //it up, or 3001
 //var port = 5100; //local
-var port = process.env.API_PORT || 3000; //prod
+var port = process.env.API_PORT || 3002; //prod
 
 //now we should configure the API to use bodyParser and look for 
 //JSON data in the request body
@@ -45,71 +48,133 @@ app.use(function(req, res, next) {
  res.setHeader('Cache-Control', 'no-cache');
  next();
 });
-//now we can set the route path & initialize the API
-router.get('/', function(req, res) {
-    res.json({ message: 'API Initialized!'});
+app.use(cors())
+// var corsOptions = {
+//     origin: 'http://localhost:3002',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   }
+
+process.on('unhandledRejection', error => {
+    // Will print "unhandledRejection err is not defined"
+    console.log('unhandledRejection', error.message);
+  });
+  
+
+//middleware for create
+var addEmail = function (req, res, next) {
+    // The name/ID for the new entity
+    var name =  Date.now();
+    // The Cloud Datastore key for the new entity
+    var taskKey = storage.key([kind, name]);
+    var task = {
+        key: taskKey,
+        data: {
+        uname: req.body.uname,
+        email: req.body.email
+        },
+    };
+    storage
+        .save(task)
+        .then(() => {
+            console.log(`Saved ${task.data.uname}: ${task.data.email}`);
+            res.json({ message: 'Comment successfully added!' });
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
+            res.send(err);
+        });
+  };
+
+var getAllEmail = function (req, res, next) {
+    var name =  'email';
+    const taskKey = storage.key(['UserInfo', name]);
+
+    storage.get(taskKey).then(comments => {
+        //console.log(comments);
+        res.json(comments);
+    });
+  };
+
+var getReactApp = function () {
+    method: 'GET';
+    path: '/build/index.html';
+}
+
+router.route('/')
+  .get(getReactApp);
+
+router.route('/emails')
+  .post(addEmail)
+  .get(getAllEmail);
+
+  app.use(express.static('public'))
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    //Use our router configuration when we call /api
+    app.use('/api', router);
+    //starts the server and listens for requests
+    app.listen(port, function() {
+    console.log(`api running on port ${port}`);
 });
+
+//now we can set the route path & initialize the API
+// router.get('/', function(req, res) {
+//     res.json({ message: 'API Initialized!'});
+// });
 
 //adding the /comments route to our /api router
-router.route('/comments')
+// router.route('/comments')
     
-    //retrieve all comments from the database
-    .get(function(req, res) {
-        //looks at our Comment Schema
-        // Comment.find(function(err, comments) {
-        //     if (err)
-        //     res.send(err);
-        //     //responds with a json object of our database comments.
-        //     res.json(comments)
-        // });
-        var name =  'email';
-        const taskKey = storage.key(['UserInfo', name]);
+//     //retrieve all comments from the database
+//     .get(function(req, res) {
+//         //looks at our Comment Schema
+//         // Comment.find(function(err, comments) {
+//         //     if (err)
+//         //     res.send(err);
+//         //     //responds with a json object of our database comments.
+//         //     res.json(comments)
+//         // });
+//         var name =  'email';
+//         const taskKey = storage.key(['UserInfo', name]);
 
-        storage.get(taskKey).then(comments => {
-            //console.log(comments);
-            res.json(comments);
-          });
-    })
+//         storage.get(taskKey).then(comments => {
+//             //console.log(comments);
+//             res.json(comments);
+//           });
+//     })
     
-    //post new comment to the database
-    .post(function(req, res) {
-        //console.log(`Saved ${req.body.email}: ${req.body.uname}`);
-        // The name/ID for the new entity
-        var name =  Date.now();
-        // The Cloud Datastore key for the new entity
-        var taskKey = storage.key([kind, name]);
-        //var comment = new Comment();
-        //body parser lets us use the req.body
-        //comment.uname = req.body.uname;
-        //comment.email = req.body.email;
-        // Prepares the new entity
-        var task = {
-            key: taskKey,
-            data: {
-            uname: req.body.uname,
-            email: req.body.email
-            },
-        };
-        storage
-            .save(task)
-            .then(() => {
-                console.log(`Saved ${task.data.uname}: ${task.data.email}`);
-                res.json({ message: 'Comment successfully added!' });
-            })
-            .catch(err => {
-                console.error('ERROR:', err);
-                res.send(err);
-            });
-        // comment.save(function(err) {
-        //     if (err)
-        //     res.send(err);
-        //     res.json({ message: 'Comment successfully added!' });
-        // });
-    });
+//     //post new comment to the database
+//     .post(function(req, res) {
+//         //console.log(`Saved ${req.body.email}: ${req.body.uname}`);
+//         // The name/ID for the new entity
+//         var name =  Date.now();
+//         // The Cloud Datastore key for the new entity
+//         var taskKey = storage.key([kind, name]);
+//         //var comment = new Comment();
+//         //body parser lets us use the req.body
+//         //comment.uname = req.body.uname;
+//         //comment.email = req.body.email;
+//         // Prepares the new entity
+//         var task = {
+//             key: taskKey,
+//             data: {
+//             uname: req.body.uname,
+//             email: req.body.email
+//             },
+//         };
+//         storage
+//             .save(task)
+//             .then(() => {
+//                 console.log(`Saved ${task.data.uname}: ${task.data.email}`);
+//                 res.json({ message: 'Comment successfully added!' });
+//             })
+//             .catch(err => {
+//                 console.error('ERROR:', err);
+//                 res.send(err);
+//             });
+//         // comment.save(function(err) {
+//         //     if (err)
+//         //     res.send(err);
+//         //     res.json({ message: 'Comment successfully added!' });
+//         // });
+//     });
 
-//Use our router configuration when we call /api
-app.use('/api', router);
-//starts the server and listens for requests
-app.listen(port, function() {
- console.log(`api running on port ${port}`);
-});

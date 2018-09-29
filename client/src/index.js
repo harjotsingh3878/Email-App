@@ -5,8 +5,8 @@ import './index.css';
 
 ReactDOM.render(
     <CommentBox
-    //url='/api/comments'
-    url='api/comments'
+    //url='http://localhost:3002/api/emails'
+    url='http://zaimbr.com/api/emails'
     pollInterval={2000} />,
     document.getElementById('root')
     

@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Node.js Email Application API",
+    "description": "Node.js Email Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "zaimbr.com",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Emails",
+      "description": "API for emails in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/emails": {
+      "post": {
+        "tags": [
+          "Emails"
+        ],
+        "description": "Create new email in system",
+        "operationId": "addNewEmail",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Email"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New email is added",
+            "schema": {
+              "$ref": "#/definitions/Email"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Get all emails in system",
+        "operationId": "getAllEmails",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Emails"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Email": {
+      "required": [
+        "email",
+        "uname"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "uname": {
+          "type": "string"
+        }
+      }
+    },
+    "Emails": {
+      "type": "array",
+      "$ref": "#/definitions/Email"
+    }
+  }
+}
