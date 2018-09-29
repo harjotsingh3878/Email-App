@@ -10,6 +10,9 @@
 /build
 /server/data
 /server/package-lock.json
+/server/package.json
+/client/package.json
+/server/swagger.json
 
 # misc
 .DS_Store
